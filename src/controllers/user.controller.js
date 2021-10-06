@@ -131,6 +131,7 @@ export const admin = async (req, res) => {
   const posts = await Post.find().populate("postedBy");
   res.render("admin", {
     user: req.user,
+    title: "Admin | Manage all appointments booking",
     posts,
     formatDate: moment,
   });
