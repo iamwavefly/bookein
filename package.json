@@ -4,8 +4,10 @@
   "description": "Booking app for blueforce",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node ./src/server.js",
-    "dev": "nodemon --exec babel-node ./src/server.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s --copy-files",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/server.js",
     "test": "jest"
   },
   "author": "wavefly",
