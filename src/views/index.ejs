@@ -59,7 +59,7 @@
                     <span class="fake-btn">Choose files</span>
                     <span class="file-msg">or drag and drop files here</span>
                     <input class="file-input" type="file" required name="document" accept="image/*"></div>
-                <textarea name="message" cols="30" rows="10" placeholder="Write your message here..." required> </textarea>
+                <textarea name="message" cols="30" rows="10" placeholder="Write your message here..." required></textarea>
                 <button type="submit" <%- user ? '' : "disabled" %>>Send Message</button>
                 <%- user ? '' : '<div class="msg warning"> <span>Please <a href="/user/new">login/signup</a> to contact me 😟</span></div>' %> 
             </form>

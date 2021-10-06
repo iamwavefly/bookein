@@ -31,12 +31,14 @@
                             <div class="header">
                                 <div class="user-panel">
                                     <div class="avatar-wrapper">
-                                        <img src=<%= post.postedBy?.photo %> alt="">
+                                        <img src=<%= post.postedBy ? post.postedBy.photo : "/static/img/placeholder.jpg" %> >
                                     </div>
                                     <div class="btn-group">
-                                        <form method="POST" action="/user/delete/<%= post.postedBy._id %>?_method=DELETE" >
-                                            <button type="submit">Delete User</button>
-                                        </form>
+                                        <% if (post.postedBy) { %>
+                                            <form method="POST" action="/user/delete/<%= post.postedBy._id %>?_method=DELETE" >
+                                                <button type="submit">Delete User</button>
+                                            </form>
+                                        <% } %>
                                         <form method="POST" action="/post/delete/<%= post._id %>?_method=DELETE" >
                                             <button type="submit">Delete Appoint.</button>
                                         </form>
@@ -46,7 +48,9 @@
                                     <span><%= formatDate(post.date).fromNow() %> </span>
                                 </div>
                             </div>
-                            <div class="contact-username"><p>👩‍💼 <%= post.postedBy?.username %></p></div>
+                            <% if (post.postedBy) { %>
+                                <div class="contact-username"><p>👩‍💼 <%= post.postedBy?.username %></p></div>
+                            <% } %>
                             <div class="title">
                                 <p><%= post.subject %> </p>
                             </div>
