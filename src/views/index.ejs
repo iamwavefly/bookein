@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li> <a href="mailto:contact@webdesigndevs.com">contact@webdesigndevs.com</a></li>
+            </ul>
+            <ul>
+                <li> <a class="brand-logo" href="/">No Logo.</a></li>
+            </ul>
+            <ul>
+                <li> <a href="/login">GitHub</a></li>
+                <li> <a href="user/<%= user ? 'logout' : 'new'%>" ><%= user ? "Logout" : "Login/Signup"%> </a></li>
+            </ul>
+        </nav>
+        <div class="header-section">
+            <h1><%= user ? `Hello, ${user.username}` : 'Contact Me'%>  👋</h1>
+            <p>This a test project from BlueForce Technology, developed with Nodejs & Expressjs</p>
+        </div>
+        <div class="link-section"><a href=""> <i class="lni lni-linkedin-original"></i></a><a href=""> <i class="lni lni-whatsapp"></i></a><a href=""> <i class="lni lni-instagram-original"></i></a><a href=""> <i class="lni lni-github-original"></i></a></div>
+    </header>
+    <div class="form-section">
+        <div class="precaution">
+            <div class="step-header">
+                <h2>What You Need To Know<p>Please read carefully before submitting your information with us ⚠️</p>
+                </h2>
+            </div>
+            <ul class="StepProgress">
+                <li class="StepProgress-item is-done"></li>
+                <p>You'll need to login/signup to submit this form 🔐</p>
+                <li class="StepProgress-item is-done"></li>
+                <p>We can either disaprove or approve your request 🙅</p>
+                <li class="StepProgress-item is-done"></li>
+                <p>Your information may be shared ↪️ </p>
+            </ul>
+        </div>
+        <div class="form-panel">
+            <div class="form-header">
+                <div class="img-wrapper"><img src="/static/img/mail.svg" alt="envelope gradient pink color svg" srcset=""></div>
+                <h2>Kindly fill the form below to contact me.</h2>
+            </div>
+            <%- include ("./partials/msg"); %>
+            <form action="/post/contact" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input class="form-control" type="number" name="phone" required placeholder="Your phone number" autofocus>
+                    <input class="form-control" type="email" name="email" required placeholder="You email">
+                </div>
+                <input class="form-control" type="text" name="subject" required placeholder="Subject">
+                <div class="file-drop-area">
+                    <span class="fake-btn">Choose files</span>
+                    <span class="file-msg">or drag and drop files here</span>
+                    <input class="file-input" type="file" required name="document" accept="image/*"></div>
+                <textarea name="message" cols="30" rows="10" placeholder="Write your message here..." required> </textarea>
+                <button type="submit" <%- user ? '' : "disabled" %>>Send Message</button>
+                <%- user ? '' : '<div class="msg warning"> <span>Please <a href="/user/new">login/signup</a> to contact me 😟</span></div>' %> 
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; <span class="fullyear"> </span><span>Right Reserved | Built with ❤️ by wavefly</span></p>
+    </footer>
+    <script src="/static/js/main.js"> </script>
+</body>
+
+</html>

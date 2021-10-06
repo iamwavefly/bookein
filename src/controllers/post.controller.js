@@ -5,7 +5,7 @@ import fs from "fs";
 // -- models
 import postSchema from "../models/Post.js";
 // routes controlles
-export const createPost = async (req, res) => {
+export const submitForm = async (req, res) => {
   // aws config
   aws.config.setPromisesDependency();
   aws.config.update({
@@ -18,7 +18,7 @@ export const createPost = async (req, res) => {
     ACL: "public-read",
     Bucket: process.env.BUCKET_NAME,
     Body: fs.createReadStream(req.file.path),
-    Key: `blog/assets/images/${req.file.originalname}`,
+    Key: `booking/assets/images/${req.file.originalname}`,
   };
   // upload image to aws
   s3.upload(params, async (err, data) => {
@@ -30,18 +30,16 @@ export const createPost = async (req, res) => {
       fs.unlinkSync(req.file.path); // Empty temp folder
       const locationUrl = data.Location;
       // save user to db
-      const postStatus = req.body.approvalCode.includes("itNotASecrete")
-        ? "Approved"
-        : "Pending";
       let Post = new postSchema({
         ...req.body,
-        thumbnail: locationUrl,
-        postStatus,
+        document: locationUrl,
+        postedBy: req.user.id,
       });
       const newPost = await Post.save();
       if (!newPost)
         return res.status(401).json({ message: "unable to save post" });
-      res.status(201).json({ message: "User created successfully", newPost });
+      req.flash("success_msg", "Submitted, Thanks.");
+      res.redirect("/");
     }
   });
 };
@@ -61,10 +59,12 @@ export const findSinglePost = async (req, res) => {
 // delete post
 export const deletePost = (req, res) => {
   const { id } = req.params;
+  console.log(id);
   try {
     postSchema.findByIdAndDelete(id, (err) => {
       if (err) return res.json({ err });
-      res.status(200).json({ message: "post deleted" });
+      req.flash("success_msg", "Appointment deleted 👍");
+      res.redirect("/user/admin");
     });
   } catch (error) {
     res.json({ message: error });

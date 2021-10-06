@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li> <a href="mailto:contact@webdesigndevs.com">contact@webdesigndevs.com</a></li>
+            </ul>
+            <ul>
+                <li> <a class="brand-logo" href="/">No Logo.</a></li>
+            </ul>
+            <ul>
+                <li> <a href="/login">GitHub</a></li>
+                <li> <a href="user/<%= user ? 'logout' : 'new'%>" ><%= user ? "Logout" : "Login/Signup"%> </a></li>
+            </ul>
+        </nav>
+        <div class="header-section admin">
+        <%- include ("./partials/msg"); %>
+            <div class="contacts">
+                <% if (posts) { %>
+                    <% posts.map(post => { %>
+                        <div class="contact">
+                            <div class="header">
+                                <div class="user-panel">
+                                    <div class="avatar-wrapper">
+                                        <img src=<%= post.postedBy?.photo %> alt="">
+                                    </div>
+                                    <div class="btn-group">
+                                        <form method="POST" action="/user/delete/<%= post.postedBy._id %>?_method=DELETE" >
+                                            <button type="submit">Delete User</button>
+                                        </form>
+                                        <form method="POST" action="/post/delete/<%= post._id %>?_method=DELETE" >
+                                            <button type="submit">Delete Appoint.</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="date-submitted">
+                                    <span><%= formatDate(post.date).fromNow() %> </span>
+                                </div>
+                            </div>
+                            <div class="contact-username"><p>👩‍💼 <%= post.postedBy?.username %></p></div>
+                            <div class="title">
+                                <p><%= post.subject %> </p>
+                            </div>
+                            <div class="message">
+                                <p><%= post.message.length > 50 ? post.message.substring(0,50) + "..." : post.message%></p>
+                            </div>
+                            <a href=<%= post.document %>> <button>Download Attarchment</button></a>
+                        </div>
+                        <% console.log(posts) %> 
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </header>
+
+    <footer>
+        <p>&copy; <span class="fullyear"> </span><span>Right Reserved | Built with ❤️ by wavefly</span></p>
+    </footer>
+    <script src="/static/js/main.js"> </script>
+</body>
+
+</html>

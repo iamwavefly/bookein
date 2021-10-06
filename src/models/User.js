@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-
-const PostSchema = new mongoose.Schema({
-  phone: {
+const UserSchema = new mongoose.Schema({
+  fullname: {
     type: String,
     required: true,
   },
@@ -9,20 +8,15 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  subject: {
+  username: {
     type: String,
     required: true,
   },
-  message: {
-    type: String,
-    required: true,
-  },
-  document: {
+  photo: {
     type: String,
   },
-  postedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+  password: {
+    type: String,
     required: true,
   },
   date: {
@@ -31,6 +25,6 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-const Post = mongoose.model("Post", PostSchema);
+const User = mongoose.model("User", UserSchema);
 
-export default Post;
+export default User;

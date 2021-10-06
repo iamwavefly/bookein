@@ -2,7 +2,7 @@
 import express from "express";
 import multer from "multer";
 import {
-  createPost,
+  submitForm,
   findAllPost,
   findSinglePost,
   deletePost,
@@ -11,11 +11,11 @@ import {
 const router = express.Router();
 // setup routes
 router.post(
-  "/new",
+  "/contact",
   multer({ dest: "temp/", limits: { fieldSize: 8 * 1024 * 1024 } }).single(
-    "thumbnail"
+    "document"
   ),
-  createPost
+  submitForm
 );
 // find all posts
 router.get("/all", findAllPost);

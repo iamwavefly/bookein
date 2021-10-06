@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
+</head>
+
+<body>
+    <div class="form-section auth">
+        <div class="form-header auth">
+            <h2>Create Your Account, It's Free.</h2>
+        </div>
+        <%- include ("./partials/msg"); %>
+        <form action="/user/new" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input class="form-control" type="text" name="fullname" placeholder="Your fullname" autofocus>
+                <input class="form-control" type="email" name="email" placeholder="You email">
+            </div>
+            <input class="form-control" type="text" name="username" placeholder="Choose a username">
+            <div class="file-drop-area">
+                <span class="fake-btn">Choose photo</span>
+                <span class="file-msg">or drag and drop photo here</span>
+                <input class="file-input" type="file" name="photo" accept="image/*"></div>
+                <input class="form-control" type="password" name="password" placeholder="Choose a password">
+                <input class="form-control" type="password" name="password2" placeholder="Repeat password">
+                <button type="submit">Signup</button>
+            <div class="msg"> <span>Already a member? &nbsp;</span><a href="/user/login">login</a>
+            </div>
+        </form>
+    </div>
+    <script src="/static/js/main.js"> </script>
+</body>
+
+</html>
