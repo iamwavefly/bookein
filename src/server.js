@@ -20,6 +20,8 @@ import { mongoURI } from "./config/keys.js";
 // init
 const server = express();
 
+import { forwardAuthenticated } from "./config/auth.js";
+
 //middleware
 server.use(methodOverride("_method"));
 server.use(express.urlencoded({ extended: true }));
@@ -71,7 +73,7 @@ mongoose
   .catch((err) => console.log(err));
 
 //-- assign route
-server.get("/", (req, res) => {
+server.get("/", forwardAuthenticated, (req, res) => {
   res.render("index", {
     title: "Welcome 👋 to my booking server",
     user: req.user,
@@ -82,7 +84,7 @@ server.use("/user/", userRoute);
 //
 
 // port listener
-server.set("port", process.env.PORT || 8080);
+server.set("port", process.env.PORT || 8000);
 
 server.listen(server.get("port"), function () {
   console.log(

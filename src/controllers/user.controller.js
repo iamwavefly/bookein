@@ -31,6 +31,7 @@ export const signup = async (req, res) => {
 
   if (errors.length > 0) {
     res.render("signup", {
+      title: "It's free | Create your account now!",
       errors,
       fullname,
       email,
@@ -43,6 +44,7 @@ export const signup = async (req, res) => {
       if (user) {
         errors.push({ msg: "Email already exists" });
         res.render("signup", {
+          title: "It's free | Create your account now!",
           errors,
           fullname,
           email,
@@ -118,7 +120,7 @@ export const login = async (req, res, next) => {
 };
 export const loginIndex = async (req, res) => {
   res.render("login", {
-    title: "Sign to contact me",
+    title: "Sigin to contact me",
   });
 };
 export const logout = async (req, res) => {

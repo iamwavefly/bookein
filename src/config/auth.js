@@ -8,6 +8,9 @@ export const ensureAuthenticated = (req, res, next) => {
 export function forwardAuthenticated(req, res, next) {
   if (!req.isAuthenticated()) {
     return next();
+  } else if (req.user.username === "admin") {
+    return res.redirect("/user/admin");
+  } else {
+    return next();
   }
-  res.redirect("/");
 }
