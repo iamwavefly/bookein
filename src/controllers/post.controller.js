@@ -1,4 +1,3 @@
-// import packages
 import "babel-polyfill";
 import aws from "aws-sdk";
 import fs from "fs";

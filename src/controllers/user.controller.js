@@ -145,17 +145,8 @@ export const deleteUser = async (req, res) => {
     // find user and delete
     User.findByIdAndDelete(id, async (err) => {
       if (err) return res.json({ err });
-
-      Post.exists({ postBy: id }, async (err, posts) => {
-        if (err) {
-          req.flash("error_msg", "sorry, error occur");
-          res.redirect("/user/admin");
-        }
-        if (posts) {
-          await Post.deleteMany({ postBy: id });
-        }
-      });
       req.flash("success_msg", "User deleted 👍");
+      // Redirect user
       res.redirect("/user/admin");
     });
   } catch (error) {
